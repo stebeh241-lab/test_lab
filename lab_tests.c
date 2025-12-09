@@ -108,11 +108,11 @@ int test_x1_bigger_than_x2()
     }
 }
 
-int test_y1_bigger_than_y2()
+int hitting_corner()
 {
     int result;
-    const int expected = 5;
-    result = throw_at_rectangle(3, 3, 1, 5, 5, 1);
+    const int expected = 3;
+    result = throw_at_rectangle(3, 3, 1, 3, 1, 3);
     if (result == expected)
     {
         // printf("test y1 bigger than y2 succeeded !\n");
@@ -120,7 +120,7 @@ int test_y1_bigger_than_y2()
     }
     else
     {
-        printf("test y1 bigger than y2 failed !\n");
+        printf("test hitting corner failed !\n");
         return 0;
     }
 }
@@ -165,7 +165,7 @@ void main()
     {
         success_count++;
     }
-    if (test_y1_bigger_than_y2() == 1)
+    if (test_hitting_the_edge() == 1)
     {
         success_count++;
     }
