@@ -40,26 +40,135 @@ int throw_at_rectangle(double x, double y, double x1, double y1, double x2, doub
     }
 }
 
-int test_all_zero()
+int test_deicmal_values()
 {
     int result;
     const int expected = 0;
-    result = throw_at_rectangle(0, 0, 0, 0, 0, 0);
+    result = throw_at_rectangle(3.5, 3.5, 2.12412, 3.1415, 2.7, 5.12512);
     if (result == expected)
     {
-        printf("testx succeeded !\n");
+        // printf("test decimal values succeeded !\n");
         return 1;
     }
     else
     {
-        printf("testx failed !\n");
+        printf("test decimal values failed !\n");
         return 0;
     }
 }
 
-int test_valid_rect() {}
+int test_x1_equals_x2()
+{
+    int result;
+    const int expected = 0;
+    result = throw_at_rectangle(2, 3, 4, 6, 4, 3);
+    if (result == expected)
+    {
+        // printf("test x1 = x2 succeeded !\n");
+        return 1;
+    }
+    else
+    {
+        printf("test x1 = x2 failed !\n");
+        return 0;
+    }
+}
+
+int test_hitting_the_edge()
+{
+    int result;
+    const int expected = 3;
+    result = throw_at_rectangle(2, 3, 2, 4, 6, 7);
+    if (result == expected)
+    {
+        // printf("test hitting the edge succeeded !\n");
+        return 1;
+    }
+    else
+    {
+        printf("test hitting the edge failed !\n");
+        return 0;
+    }
+}
+
+int test_x1_bigger_than_x2()
+{
+    int result;
+    const int expected = 5;
+    result = throw_at_rectangle(3, 3, 5, 1, 1, 5);
+    if (result == expected)
+    {
+        // printf("test x1 bigger than x2 succeeded !\n");
+        return 1;
+    }
+    else
+    {
+        printf("test x1 bigger than x2 failed !\n");
+        return 0;
+    }
+}
+
+int test_y1_bigger_than_y2()
+{
+    int result;
+    const int expected = 5;
+    result = throw_at_rectangle(3, 3, 1, 5, 5, 1);
+    if (result == expected)
+    {
+        // printf("test y1 bigger than y2 succeeded !\n");
+        return 1;
+    }
+    else
+    {
+        printf("test y1 bigger than y2 failed !\n");
+        return 0;
+    }
+}
+
+int test_negative_values()
+{
+    int result;
+    const int expected = 5;
+    result = throw_at_rectangle(-3, -3, -5, -5, -1, -1);
+    if (result == expected)
+    {
+        // printf("test negative values succeeded !\n");
+        return 1;
+    }
+    else
+    {
+        printf("test negative values failed !\n");
+        return 0;
+    }
+}
 
 void main()
 {
-    test_all_zero();
+    int success_count = 0;
+    if (test_deicmal_values() == 1)
+    {
+        success_count++;
+    }
+    if (test_hitting_the_edge() == 1)
+    {
+        success_count++;
+    }
+    if (test_negative_values() == 1)
+    {
+        success_count++;
+    }
+    if (test_x1_bigger_than_x2() == 1)
+    {
+        success_count++;
+    }
+    if (test_x1_equals_x2() == 1)
+    {
+        success_count++;
+    }
+    if (test_y1_bigger_than_y2() == 1)
+    {
+        success_count++;
+    }
+    if (success_count == 6)
+        printf("All tests were successful!\n");
 }
