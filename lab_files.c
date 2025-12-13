@@ -101,15 +101,15 @@ matrix file_to_struct_mat_2(char *mat_file_in, mat_size size_of_mat_in) // Reads
 matrix matrix_multiplier(matrix input_1, matrix input_2, mat_size size_of_1, mat_size size_of_2) // takes two "matrices" and their sizes and returns a matrix with new size.
 {
     matrix output;
-    for (int i = 0; i < size_of_1.n_rows; i++)
+    for (int i = 0; i < size_of_1.n_rows; i++) // one iteration for each number of rows of first matrix
     {
-        for (int j = 0; j < size_of_2.n_columns; j++)
+        for (int j = 0; j < size_of_2.n_columns; j++) // one iteration for each number of columns of second matrix
         {
-            output.rows[i].numbers[j] = 0;
-            for (int n = 0; n < size_of_1.n_columns; n++)
+            output.rows[i].numbers[j] = 0;                // this is what will become each element in the result matrix
+            for (int n = 0; n < size_of_1.n_columns; n++) // one iteration for each numnber oc columns of first matrix
             {
-                float product = input_1.rows[i].numbers[n] * input_2.columns[j].numbers[n];
-                output.rows[i].numbers[j] = output.rows[i].numbers[j] + product;
+                float product = input_1.rows[i].numbers[n] * input_2.columns[j].numbers[n]; // multiply members
+                output.rows[i].numbers[j] = output.rows[i].numbers[j] + product;            // add result from above multiplication to what will be element for each iteration of the "j loop"
             }
         }
     }
@@ -121,16 +121,16 @@ void write_result_file(char *filename, matrix result, int rows_of_A, int columns
     printf("Resulting matrix will be %d rows and %d columnes\n", rows_of_A, columns_of_B);
     FILE *fp;
     fp = fopen(filename, "w");
-    fprintf(fp, "%d %d\n", rows_of_A, columns_of_B);
-    for (int n = 0; n < rows_of_A; n++) // en iteration av nästa loop för varje rad.
+    fprintf(fp, "%d %d\n", rows_of_A, columns_of_B); // prints the size of result to file
+    for (int n = 0; n < rows_of_A; n++)              // One iteration for each row of result matrix
     {
 
-        for (int i = 0; i < columns_of_B; i++) // för varje column skriver vi ett element.
+        for (int i = 0; i < columns_of_B; i++) // One iteration for each column of result matrix
         {
             printf("out: rad %d column %d = %f,\n", n, i, result.rows[n].numbers[i]);
             fprintf(fp, "%f ", result.rows[n].numbers[i]);
         }
-        fprintf(fp, "\n");
+        fprintf(fp, "\n"); // linebreak after each row has been printed to file.
     }
     fclose(fp);
 }
